@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChattingGO - Real-Time Secure Messaging</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* --- Color Palette --- */
+        /* Primary Accent: #ffed2bff (Bright Yellow/Gold) */
+        /* Text/Background: Black and White */
+
+        /* Base Styles & Typography */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            color: #ffffff;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        h1, h2, h3, h4 {
+            color: #ffffff;
+            font-weight: 800;
+        }
+
+        /* --- Navigation Bar --- */
+        .header {
+            background-color: #000000;
+            border-bottom: 2px solid #ffed2bff;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* --- LOGO STYLING (NEW) --- */
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .logo-chatting {
+            font-size: 0.9em; /* Slightly smaller than GO */
+            color: #ffffff; /* White color */
+        }
+
+        .logo-go {
+            font-size: 1.1em; /* Slightly larger than Chatting */
+            color: #ffed2bff; /* Main accent color */
+        }
+        /* --- END LOGO STYLING --- */
+
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ffed2bff;
+        }
+
+        /* Call-to-Action Buttons */
+        .cta-button {
+            display: inline-block;
+            padding: 14px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: transform 0.2s, background-color 0.2s;
+            text-align: center;
+            letter-spacing: 1px;
+            border: 2px solid #ffed2bff;
+        }
+
+        .primary-btn {
+            background-color: #ffed2bff;
+            color: #000000;
+        }
+
+        .primary-btn:hover {
+            background-color: #fff;
+            color: #000000;
+            transform: translateY(-2px);
+        }
+
+        .secondary-btn {
+            background-color: #000000;
+            color: #ffed2bff;
+            font-size: 1.1rem;
+        }
+
+        .secondary-btn:hover {
+            background-color: #ffed2bff;
+            color: #000000;
+            transform: translateY(-2px);
+        }
+
+        .nav-button {
+            
+            color: #fff !important;
+            border-radius: 50px;
+        }
+
+        /* --- Hero Section --- */
+        .hero-section {
+            background-color: #000000;
+            padding: 100px 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-section .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: left;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 50%;
+        }
+
+        .hero-content h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+        
+        .hero-content span {
+            color: #ffed2bff;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            color: #cccccc;
+        }
+
+        .hero-image {
+            flex: 1;
+            max-width: 45%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- Responsive Image Styling --- */
+        .responsive-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            /* Removed all borders and shadows */
+            border-radius: 0;
+            box-shadow: none;
+            transition: transform 0.3s ease;
+        }
+
+        .responsive-image:hover {
+            transform: translateY(-5px);
+        }
+
+        /* --- Features Section (Zig-Zag Layout) --- */
+        .features-section {
+            padding: 100px 0;
+            background-color: #111;
+        }
+
+        .features-section h3 {
+            font-size: 3rem;
+            margin-bottom: 80px;
+            text-align: center;
+            color: #ffed2bff;
+            text-transform: uppercase;
+        }
+
+        .feature-block {
+            display: flex;
+            align-items: center;
+            margin-bottom: 120px;
+            gap: 50px;
+        }
+
+        /* Styles for blocks where the image is on the RIGHT (odd features) */
+        .feature-block:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        /* Styles for blocks where the image is on the LEFT (even features) */
+        .feature-block:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .feature-content {
+            flex: 1;
+            max-width: 50%;
+            padding: 20px;
+        }
+
+        .feature-content h4 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+            padding-right: 15px;
+        }
+        
+        .feature-block:nth-child(even) .feature-content h4 {
+            border-left: none;
+            padding-right: 0;
+            padding-left: 15px;
+        }
+
+        .feature-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            max-width: 50%;
+            /* Removed all background styling */
+            background: none;
+            padding: 0;
+            border-radius: 0;
+        }
+
+        /* --- Download Section --- */
+        .download-section {
+            background-color: #000000;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            border-top: 2px solid #ffed2bff;
+        }
+
+        .download-section h3 {
+            color: #ffed2bff;
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .download-section p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            color: #ffffff;
+        }
+
+        .download-section .small-text {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 20px;
+            color: #ffffff;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background-color: #111;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            border-top: 1px solid #ffed2bff;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 992px) {
+            .hero-section .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-image { 
+                order: -1; 
+                margin-bottom: 40px; 
+                max-width: 80%;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+            }
+
+            .feature-block {
+                flex-direction: column;
+                margin-bottom: 60px;
+                text-align: center;
+            }
+            .feature-block:nth-child(odd),
+            .feature-block:nth-child(even) {
+                flex-direction: column;
+            }
+            .feature-content, .feature-image {
+                max-width: 100%;
+            }
+            .feature-block:nth-child(even) .feature-content h4,
+            .feature-content h4 {
+                border-left: 5px solid #ffed2bff;
+                border-right: none;
+                padding-left: 15px;
+                padding-right: 0;
+                text-align: left;
+                width: 80%;
+                margin: 0 auto 15px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content h2 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-image {
+                max-width: 90%;
+            }
+            
+            .features-section h3 {
+                font-size: 2.5rem;
+            }
+            
+            .feature-content h4 {
+                font-size: 1.7rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-content h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+            
+            .features-section h3 {
+                font-size: 2rem;
+            }
+            
+            .feature-content h4 {
+                font-size: 1.5rem;
+            }
+            
+            .download-section h3 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">
+                <span class="logo-chatting">Chatting</span>
+                <span class="logo-go">GO</span>
+            </h1>
+            <nav>
+                <ul>
+                    <li><a href="#download" class="nav-button">Download Now</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h2>The Future of Secure Chat is <span>ChattingGO</span></h2>
+                <p>Experience lightning-fast messaging with military-grade, end-to-end encryption. Simple setup, maximum security.</p>
+                <a href="#download" class="cta-button primary-btn">Start Chatting Today</a>
+            </div>
+            <div class="hero-image">
+                <img src="images/Screenshot 2025-11-27 180308.png" alt="ChattingGO App Real-Time Chat Screen" class="responsive-image">
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features-section">
+        <div class="container">
+            <h3>Key Features</h3>
+
+            <div class="feature-block">
+                <div class="feature-image">
+                    <img src="images/Screenshot 2025-11-27 180211.png" alt="ChattingGO App Chat List Screen" class="responsive-image">
+                </div>
+                <div class="feature-content">
+                    <h4>Real-Time Messaging</h4>
+                    <p>Experience instant communication. Our technology ensures messages are delivered and received with virtually zero latency, keeping your conversations fluid and natural.</p>
+                </div>
+                
+            </div>
+
+            <div class="feature-block">
+                <div class="feature-image">
+                    <img src="images/Screenshot 2025-11-27 180156.png" alt="ChattingGO App Security Lock Icon" class="responsive-image">
+                </div>
+                <div class="feature-content">
+                    <h4>End-to-End Encryption (E2EE)</h4>
+                    <p>Your privacy is our top priority. E2EE ensures that only you and the recipient can read what is sent. Secure your data from all unauthorized third parties.</p>
+                </div>
+                
+            </div>
+
+            <div class="feature-block">
+                <div class="feature-image">
+                    <img src="images/Screenshot 2025-11-27 180556.png" alt="ChattingGO App Image Sharing Feature" class="responsive-image">
+                </div>
+                <div class="feature-content">
+                    <h4>Instant Image Sharing</h4>
+                    <p>Share your favorite photos within chats. All shared content benefits from our robust security measures.</p>
+                </div>
+                
+            </div>
+
+            <div class="feature-block">
+                <div class="feature-image">
+                    <img src="images/Screenshot 2025-11-27 180224.png" alt="ChattingGO App Login Screen" class="responsive-image">
+                </div>
+                <div class="feature-content">
+                    <h4>Secure Authentication</h4>
+                    <p>Simple and reliable Email and Password based registration and login. Get started quickly while keeping your account protected.</p>
+                </div>
+                
+            </div>
+
+            <div class="feature-block">
+                <div class="feature-image">
+                    <img src="images/Screenshot 2025-11-27 180651.png" alt="ChattingGO App User Search Screen" class="responsive-image">
+                </div>
+                <div class="feature-content">
+                    <h4>Username Base Searching</h4>
+                    <p>Easily find and connect with friends using a unique username & Name. No need for phone numbers, just type and chat!</p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <section id="download" class="download-section">
+        <div class="container">
+            <h3>Download ChattingGO</h3>
+            <p>Get the official Android APK file and join the revolution in secure messaging.</p>
+            <a href="apk/ChattingGo.apk" download class="cta-button secondary-btn">
+                Download APK Now (Android)
+            </a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 ChattingGO. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple script for optional smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId !== '#') {
+                    document.querySelector(targetId).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
